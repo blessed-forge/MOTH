@@ -250,13 +250,16 @@ function Moth.IsAPlayer()
 end
 
 function Moth.UpdateName( cellName, cellFont )
-
+  -- d(cellName)
 	local unitName		= GetStringFormatFromTable( "HUDStrings", StringTables.HUD.LABEL_HUD_MOUSEOVER_TARGET_UNIT_NAME, { TargetInfo:UnitName( "mouseovertarget" ) } )
 	local careerLine	= TargetInfo:UnitCareer( "mouseovertarget" )
 	local nameColor		= TargetInfo:UnitRelationshipColor( "mouseovertarget" )
 	local colorType		= Moth.Global.unitNameColor
 	local careerColor	= GuidanceCounselor.Color( careerLine, colorType )
-	
+	--local guildName   = TargetInfo:Guild( "mouseovertarget" )
+  
+  --d(TargetInfo)
+  
 	if Moth.IsAPlayer() and Moth.UnitHealth() then
 		nameColor = careerColor
 	end
@@ -647,6 +650,11 @@ function Moth.HideTemplateElements( cellName )
 	WindowSetShowing( cellName.."RankBackground", false )
 end
 
+function Moth.UpdateGuild ( cellName )
+	d(cellName)
+  d("blahblah")
+end
+
 function Moth.Populate( Structure )
 
 	local rowNum = 0
@@ -695,7 +703,7 @@ function Moth.Populate( Structure )
 				Moth.UpdateCareerName( cellName, cellFont )
 				
 			elseif cellType == "Guild" then
-				-- | 
+				Moth.UpdateGuild ( cellName ) 
 				
 			elseif cellType == "NPCIcon" then
 				Moth.UpdateNPCIcon( cellType, cellNum, cellName, iconSize )
